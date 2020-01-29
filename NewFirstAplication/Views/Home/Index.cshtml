@@ -1,0 +1,39 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<form action="http://localhost:54199/OnGet" method="get">
+    <input type="text" name="arg" />
+    <button> Enviar Get </button>
+</form>
+
+<form action="http://localhost:54199/OnPost" method="post">
+    <input type="text" name="arg" />
+    <button> Enviar Post </button>
+</form>
+
+<form method="get" asp-action="OnGet">
+    <input type="text" name="arg" />
+    <button> Enviar Asp-Action Post </button>
+</form>
+
+<form id="fetchForm">
+    <input name="arg" type="text" id="fetchInput" />
+</form>  
+
+<button id="fetchButtonPost"> Enviar Fetch Post</button>
+
+<script>
+    const fetchForm = document.getElementById("fetchForm");
+    const fetchButtonPost = document.getElementById("fetchButtonPost");
+
+    fetchButtonPost.onclick = function () {
+        fetch("Home/OnPost", {
+            method: "post",
+            body: new FormData(fetchForm)
+
+        })
+            .then(response => response.text())
+            .then(response => alert(response));
+    }
+</script>
